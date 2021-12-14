@@ -16,7 +16,7 @@ extension UIButton {
             return self.currentTitle
         }
         set{
-            self.setTitle(newValue, for: .normal)
+            self.setTitle(newValue, for: UIControl.State())
         }
     }
   

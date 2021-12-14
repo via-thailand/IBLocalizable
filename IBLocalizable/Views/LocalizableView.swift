@@ -47,6 +47,7 @@ extension UIView : Localizable {
              *  Applys the localization to the property
              */
             applyLocalizableString(newValue)
+            self.localizableStringKey = newValue
         }
     }
     
