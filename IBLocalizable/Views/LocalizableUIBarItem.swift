@@ -11,6 +11,20 @@ import UIKit
 // MARK: - BarItem Extension that adds the localizable property
 extension UIBarItem: Localizable {
     
+    private static var _localizableStringKeys = [String: String]()
+    
+    public var localizableStringKey: String {
+        get {
+            let tmpAddress = String(format: "%p", unsafeBitCast(self, to: Int.self))
+            return UIBarItem._localizableStringKeys[tmpAddress] ?? ""
+        }
+        set(newValue) {
+            let tmpAddress = String(format: "%p", unsafeBitCast(self, to: Int.self))
+            UIBarItem._localizableStringKeys[tmpAddress] = newValue
+        }
+    }
+
+    
     public var localizableProperty: String?{
         get{
             return self.title

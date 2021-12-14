@@ -16,9 +16,13 @@ extension String {
         return localize(withBundle: Bundle.main)
     }
     
-    public func localize(withBundle bundle: Bundle) -> String
-    {
-        return NSLocalizedString(self, tableName: nil, bundle: bundle, value: "", comment: "")
+    public func localize(withBundle bundle: Bundle) -> String {
+        var languageBundle = bundle
+        if let currentLanguage = UserDefaults.standard.string(forKey: "LCLCurrentLanguageKey"), let bundlePath = Bundle.main.path(forResource: currentLanguage, ofType: "lproj"), let bundle = Bundle(path: bundlePath) {
+            languageBundle = bundle
+        }
+       return NSLocalizedString(self, tableName: nil, bundle: languageBundle, value: "", comment: "")
     }
+
 
 }

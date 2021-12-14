@@ -11,6 +11,19 @@ import UIKit
 // MARK: - Navigation item extension that adds the localizable property
 extension UINavigationItem: Localizable {
     
+    private static var _localizableStringKeys = [String: String]()
+    
+    public var localizableStringKey: String {
+        get {
+            let tmpAddress = String(format: "%p", unsafeBitCast(self, to: Int.self))
+            return UINavigationItem._localizableStringKeys[tmpAddress] ?? ""
+        }
+        set(newValue) {
+            let tmpAddress = String(format: "%p", unsafeBitCast(self, to: Int.self))
+            UINavigationItem._localizableStringKeys[tmpAddress] = newValue
+        }
+    }
+    
     public var localizableProperty: String?{
         get{
             return self.title

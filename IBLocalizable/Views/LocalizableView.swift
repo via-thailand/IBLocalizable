@@ -11,6 +11,20 @@ import UIKit
 // MARK: - Base Class implementation extension
 extension UIView : Localizable {
     
+    private static var _localizableStringKeys = [String: String]()
+    
+    public var localizableStringKey: String {
+        get {
+            let tmpAddress = String(format: "%p", unsafeBitCast(self, to: Int.self))
+            return UIView._localizableStringKeys[tmpAddress] ?? ""
+        }
+        set(newValue) {
+            let tmpAddress = String(format: "%p", unsafeBitCast(self, to: Int.self))
+            UIView._localizableStringKeys[tmpAddress] = newValue
+        }
+    }
+
+    
     /// Not implemented in base class
    @objc public var localizableProperty: String?{
         get{
